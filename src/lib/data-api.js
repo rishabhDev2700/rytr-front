@@ -1,6 +1,6 @@
 import axios from 'axios';
-
-const URL = 'https://rytrapi.fuzzydevs.com'
+const URL = 'http://localhost:8080'
+// const URL = 'https://rytrapi.fuzzydevs.com'
 const api = axios.create({
     baseURL: URL,
     timeout: 5000
