@@ -55,7 +55,7 @@ export default function CardsPage() {
           </DialogContent>
         </Dialog>
       </div>
-      <div className="grid lg:grid-cols-6">{data ? data : "No Card to show"}</div>
+      <div className="grid lg:grid-cols-3 xl:grid-cols-4">{data ? data : "No Card to show"}</div>
     </motion.div>
   );
 }

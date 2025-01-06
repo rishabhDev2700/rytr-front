@@ -172,11 +172,10 @@
       @apply text-sm;
     }
   }
-  #editorblock {
-    @apply dark:text-neutral-300 border p-0 m-0
+  .active {
+    @apply bg-neutral-200 dark:bg-neutral-700;
   }
-  .active{
-    @apply bg-neutral-200 dark:bg-neutral-700
+  .ce-block__content {
+    @apply lg:min-w-[95%] mx-4;
   }
- 
 }

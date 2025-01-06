@@ -35,7 +35,7 @@ export default function NotesPage() {
           New Note
         </Button>
       </div>
-      <div className="grid lg:grid-cols-6">
+      <div className="grid lg:grid-cols-3 xl:grid-cols-4">
         {notes?.map(n => <NoteCard
           id={n.id}
           key={n.id}

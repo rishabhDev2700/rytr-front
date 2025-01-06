@@ -1,6 +1,6 @@
 import axios from 'axios';
-// const URL = 'http://localhost:8080'
-const URL = 'https://rytrapi.fuzzydevs.com'
+const URL = 'http://localhost:8080'
+// const URL = 'https://rytrapi.fuzzydevs.com'
 const api = axios.create({
     baseURL: URL,
     timeout: 5000
@@ -48,9 +48,11 @@ export const authAPI = {
                 email,
                 password
             });
+            console.log("Login response:",response.status)
             return response;
         } catch (error) {
-            throw error.response?.data || { message: 'Login failed' };
+            console.log("catched")
+            throw error || { message: 'Login failed' };
         }
     },
 

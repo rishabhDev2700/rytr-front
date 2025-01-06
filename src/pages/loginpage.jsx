@@ -19,8 +19,8 @@ import { motion } from 'motion/react';
 import { animation, transition } from '../lib/constants'
 import { ModeToggle } from "../components/mode-toggle"
 import { useAuth } from '../components/auth-hook'
-export default function LoginPage() {
 
+export default function LoginPage() {
     const [email, setEmail] = useState("")
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
@@ -29,40 +29,53 @@ export default function LoginPage() {
     const [errors, setErrors] = useState({})
     const navigate = useNavigate()
     const { token, setToken } = useAuth();
+
     useEffect(() => {
         if (token) {
             navigate("/dashboard");
         }
     }, [token]);
 
+    const validatePassword = (password) => {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return passwordRegex.test(password);
+    };
 
     async function handleLoginSubmission() {
-        const response = await authAPI.login(email, password)
-        // const response = await axios.
-        if (response.status === 200) {
-            const token = response.data
-            localStorage.setItem("token", token.token)
-            setToken(token.token)
-            toast("Logged in Successfully.")
-            navigate('/dashboard')
+        try {
+            const response = await authAPI.login(email, password)
+            if (response.status === 200) {
+                const token = response.data
+                localStorage.setItem("token", token.token)
+                setToken(token.token)
+                toast("Logged in Successfully.")
+                navigate('/dashboard')
+            }
         }
-
+        catch (err) {
+            toast("Invalid Credentials")
+        }
     }
+
     async function handleRegisterSubmission() {
         if (confirmPassword !== password) {
-            toast.error("Passwords didn't match")
+            toast("Passwords didn't match")
             return false
         }
-        const response = await authAPI.register({ first_name: firstName, last_name: lastName, email: email, password: password })
-        // const response = await axios.
-        if (response.status === 200) {
-            toast("Signed up Successfully.")
+        if (!validatePassword(password)) {
+            toast("Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.")
+            return false
         }
-        else {
-            toast.error("something went wrong")
+        try {
+            const response = await authAPI.register({ first_name: firstName, last_name: lastName, email: email, password: password })
+            if (response.status === 200) {
+                toast("Signed up Successfully.")
+            }
+        } catch (error) {
+            toast("Something went wrong")
         }
-
     }
+
     return (
         <motion.div animate={animation} transition={transition} className='h-screen w-full grid place-content-center relative'>
             <img src={LoginBG} className='w-screen h-screen object-cover brightness-75 blur-[2px]' />
@@ -100,7 +113,7 @@ export default function LoginPage() {
                         <CardHeader>
                             <CardTitle>Sign up</CardTitle>
                             <CardDescription>
-                                Create a new Rytr Account
+                                Create a new Account
                             </CardDescription>
                         </CardHeader>
                         <CardContent className="space-y-2">
@@ -126,7 +139,7 @@ export default function LoginPage() {
                             </div>
                         </CardContent>
                         <CardFooter>
-                            <Button onClick={handleRegisterSubmission}>Sign up</Button>
+                            <Button className="dark:text-black" onClick={handleRegisterSubmission}>Sign up</Button>
                         </CardFooter>
                     </Card>
                 </TabsContent>

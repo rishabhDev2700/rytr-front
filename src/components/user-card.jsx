@@ -25,7 +25,7 @@ export default function UserCard({ id, title, description, status, createdOn, up
     async function handleDelete() {
         await dataAPI.deleteCard(id)
         update()
-        toast.error("Deleting Card!")
+        toast("Deleting Card!")
     }
     async function handleStatusUpdate(s) {
         await dataAPI.updateCardStatus(id, { status: Number(s) })
