@@ -1,12 +1,14 @@
 .codex-editor {
-  @apply max-w-full rounded-xl p-2 m-0  
+  @apply max-w-full rounded-xl p-2 m-0;
 }
-
+.ce-toolbar__content{
+  @apply ml-8
+}
 .ce-toolbar__plus {
-  @apply dark:bg-black;
+  @apply dark:bg-black md:ml-12 border-2;
 }
 .ce-toolbar__settings-btn {
-  @apply dark:bg-black;
+  @apply dark:bg-black border-2;
 }
 
 .ce-popover__container {
@@ -17,19 +19,20 @@
   @apply hover:dark:bg-neutral-600;
 }
 
-.ce-block{
-  @apply p-2 m-0 w-full
+.ce-block {
+  @apply p-2 m-0 w-full;
 }
 .ce-block__content {
   @apply dark:text-black dark:bg-neutral-950 rounded-xl;
 }
 
-.codex-editor__redactor{
-  @apply w-full
+.codex-editor__redactor {
+  @apply w-full;
 }
-#editorblock{
-  @apply  ml-12 max-w-5xl
+#editorblock {
+  @apply ml-0 md:ml-12 md:max-w-5xl;
 }
-.cdx-search-field, .ce-popover__search{
-  @apply dark:bg-black
+.cdx-search-field,
+.ce-popover__search {
+  @apply dark:bg-black;
 }
