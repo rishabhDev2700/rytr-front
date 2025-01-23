@@ -10,14 +10,21 @@ import Header from "@editorjs/header";
 import List from "@editorjs/list";
 import Link from "@editorjs/link";
 import Delimiter from "@editorjs/delimiter";
-import CheckList from "@editorjs/checklist";
 import EditorJS from '@editorjs/editorjs';
 import { useParams } from "react-router";
-
+import './../editor.css';
 
 
 const EDITOR_JS_TOOLS = {
-    header: Header,
+    header: {
+        class: Header,
+        inlineToolbar: true,
+        config: {
+            levels: [1, 2, 3],
+            defaultLevel: 1,
+            placeholder: 'Enter a heading...',
+        },
+    },
     paragraph: {
         class: Paragraph,
         inlineToolbar: true,
@@ -39,7 +46,7 @@ export default function NoteEditor() {
     const ref = useRef();
     async function fetchNote() {
         const response = await dataAPI.getNoteById(id)
-        const data = JSON.parse (response.note.content)
+        const data = JSON.parse(response.note.content)
         setNote({ title: response.note.title, content: data })
         return data
     }
@@ -53,28 +60,35 @@ export default function NoteEditor() {
         setLoading(true);
         await dataAPI.updateNote(id, { title: note.title, content: JSON.stringify(content) });
         setLoading(false);
-    }, 1000); 
+    }, 1000);
 
     useEffect(() => {
         const setup = async () => {
             const content = await fetchNote()
             if (!ref.current) {
                 const editor = new EditorJS({
+                    theme: "dark",
                     holder: editorblock,
                     data: content,
                     tools: EDITOR_JS_TOOLS,
                     async onChange(api, event) {
-                        setLoading(l=>true)
+                        setLoading(l => true)
                         const data = await api.saver.save()
                         setNote(prevNote => ({ ...prevNote, content: data }));
                         debouncedSave(data);
                         setLoading(l => false)
 
                     },
+                    onReady: () => {
+                        const editorElement = document.getElementById('editorjs');
+                        editorElement.classList.add('bg-white', 'dark:bg-red-800', 'text-gray-800', 'dark:text-gray-200', 'rounded-lg', 'p-4');
+                    },
                 });
+
                 ref.current = editor;
             }
         }
+
         setup()
         return () => {
             if (ref.current && ref.current.destroy) {
@@ -82,6 +96,7 @@ export default function NoteEditor() {
             }
         };
     }, []);
+
 
     return (
         <div className="lg:m-4">
@@ -91,7 +106,7 @@ export default function NoteEditor() {
                 className="text-4xl my-8 p-2 rounded-xl bg-transparent text-neutral-500 focus:text-neutral-800 dark:focus:text-neutral-300 outline-none w-full"
                 placeholder="Title of the Note"
             />
-            <div id="editorblock" className=""></div>
+            <div id="editorblock" className="ce-block__content editorjs-toolbar"></div>
             <Separator orientation="horizontal" />
             {loading &&
 

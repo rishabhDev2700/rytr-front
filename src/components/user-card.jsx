@@ -38,7 +38,7 @@ export default function UserCard({ id, title, description, status, createdOn, up
                 <CardTitle>
                     {title}
                 </CardTitle>
-                <CardDescription className="h-32">
+                <CardDescription className="max-h-32">
                     {description}
                 </CardDescription>
             </CardHeader>
@@ -59,10 +59,10 @@ export default function UserCard({ id, title, description, status, createdOn, up
                     Updated on: {updatedOn.toLocaleDateString()}
                 </div>
             </CardContent>
-            <CardFooter className="flex items-center justify-between m-0 pt-0">
+            <CardFooter className="flex items-center justify-between m-0 pt-0 px-4">
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button className=" bg-teal-600 hover:bg-teal-800"><Pencil2Icon color='white' />Edit</Button>
+                        <Button className=" bg-fuchsia-600 hover:bg-fuchsia-800"><Pencil2Icon color='white' />Edit</Button>
                     </DialogTrigger>
                     <DialogContent>
                         <DialogHeader>
@@ -75,7 +75,7 @@ export default function UserCard({ id, title, description, status, createdOn, up
                     </DialogContent>
                 </Dialog>
 
-                <Button className=" bg-red-600 hover:bg-red-800" onClick={handleDelete}><TrashIcon color='white' />Delete</Button>
+                <Button className="bg-rose-500 hover:bg-rose-800" onClick={handleDelete}><TrashIcon color='white' />Delete</Button>
             </CardFooter>
         </Card>
     )

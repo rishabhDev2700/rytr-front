@@ -1,0 +1,35 @@
+.codex-editor {
+  @apply max-w-full rounded-xl p-2 m-0  
+}
+
+.ce-toolbar__plus {
+  @apply dark:bg-black;
+}
+.ce-toolbar__settings-btn {
+  @apply dark:bg-black;
+}
+
+.ce-popover__container {
+  @apply dark:bg-black;
+}
+
+.ce-popover-item {
+  @apply hover:dark:bg-neutral-600;
+}
+
+.ce-block{
+  @apply p-2 m-0 w-full
+}
+.ce-block__content {
+  @apply dark:text-black dark:bg-neutral-950 rounded-xl;
+}
+
+.codex-editor__redactor{
+  @apply w-full
+}
+#editorblock{
+  @apply  ml-12 max-w-5xl
+}
+.cdx-search-field, .ce-popover__search{
+  @apply dark:bg-black
+}

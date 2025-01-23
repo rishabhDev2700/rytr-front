@@ -22,8 +22,8 @@ export default function NoteCard({ id, title, content, createdOn, updatedOn, upd
                 </CardTitle>
             </CardHeader>
             <CardContent className="p-4">
-                <Separator className='bg-black/50 dark:bg-white/50'/>
-                <div className='font-thin text-neutral-500 dark:text-white py-2 text-sm'>
+                <Separator className='bg-black/50 dark:bg-white/50' />
+                <div className='font-thin text-neutral-500 dark:text-white pt-1 text-xs'>
                     Created on: {createdOn.toLocaleDateString('en-US', {
                         weekday: 'short',
                         year: 'numeric',
@@ -31,11 +31,11 @@ export default function NoteCard({ id, title, content, createdOn, updatedOn, upd
                         day: 'numeric',
                         hour: 'numeric',
                         minute: 'numeric',
-                       
+
                         hour12: true,
                     })}
                 </div>
-                <div className='font-thin text-neutral-500 dark:text-white py-2 text-sm'>
+                <div className='font-thin text-neutral-500 dark:text-white pb-1 text-xs'>
                     Last Update: {updatedOn.toLocaleDateString('en-US', {
                         weekday: 'short',
                         year: 'numeric',
@@ -48,7 +48,7 @@ export default function NoteCard({ id, title, content, createdOn, updatedOn, upd
                     })}
                 </div>
             </CardContent>
-            <CardFooter className="m-0 pt-0 flex justify-between">
+            <CardFooter className="m-0 pt-0 flex justify-between px-4">
                 <Link to={`/dashboard/editor/${id}`}>
                     <Button className=" bg-indigo-500 hover:bg-indigo-800"><EnterIcon color='white' />Open</Button>
                 </Link>
