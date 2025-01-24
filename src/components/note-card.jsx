@@ -7,6 +7,17 @@ import { toast } from 'sonner'
 import { Link } from 'react-router'
 import { dataAPI } from '../lib/data-api'
 import { Separator } from './ui/separator'
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 export default function NoteCard({ id, title, content, createdOn, updatedOn, update }) {
     async function handleDelete() {
@@ -52,7 +63,25 @@ export default function NoteCard({ id, title, content, createdOn, updatedOn, upd
                 <Link to={`/dashboard/editor/${id}`}>
                     <Button className=" bg-indigo-500 hover:bg-indigo-800"><EnterIcon color='white' />Open</Button>
                 </Link>
-                <Button className=" bg-rose-500 hover:bg-rose-800" onClick={handleDelete}><TrashIcon color='white' />Delete</Button>
+                <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                        <Button className="bg-rose-500 hover:bg-rose-800"><TrashIcon color='white' />Delete</Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                        <AlertDialogHeader>
+                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                                This action cannot be undone. This will permanently delete your
+                                card and remove your data from our servers.
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction asChild><Button className="bg-rose-500 hover:bg-rose-800" onClick={handleDelete}><TrashIcon color='white' />Delete</Button>
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
             </CardFooter>
         </Card>
     )

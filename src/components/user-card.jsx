@@ -11,6 +11,17 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
 
 import {
     Select,
@@ -74,8 +85,25 @@ export default function UserCard({ id, title, description, status, createdOn, up
                         <CardForm cardID={id} title={title} description={description} status={status} update={update} />
                     </DialogContent>
                 </Dialog>
-
-                <Button className="bg-rose-500 hover:bg-rose-800" onClick={handleDelete}><TrashIcon color='white' />Delete</Button>
+                <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                        <Button className="bg-rose-500 hover:bg-rose-800"><TrashIcon color='white' />Delete</Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                        <AlertDialogHeader>
+                            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                            <AlertDialogDescription>
+                                This action cannot be undone. This will permanently delete your
+                                card and remove your data from our servers.
+                            </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                            <AlertDialogCancel>Cancel</AlertDialogCancel>
+                            <AlertDialogAction asChild><Button className="bg-rose-500 hover:bg-rose-800" onClick={handleDelete}><TrashIcon color='white' />Delete</Button>
+                            </AlertDialogAction>
+                        </AlertDialogFooter>
+                    </AlertDialogContent>
+                </AlertDialog>
             </CardFooter>
         </Card>
     )
