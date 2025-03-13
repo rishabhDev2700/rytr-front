@@ -1,33 +1,37 @@
 import React from 'react';
 import { useDraggable } from '@dnd-kit/core';
-import { Separator } from "@/components/ui/separator"
 import { CSS } from '@dnd-kit/utilities';
-import { Card, CardHeader, CardDescription, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
-export function Item({ item, style }) {
-    const { attributes, listeners, setNodeRef, transform } = useDraggable({
-        id: item.title,
-        data: { id: item.id }
-    });
-    const itemstyle = {
-        ...style,
-        transform: CSS.Translate.toString(transform),
-    }
+import { Card, CardHeader, CardDescription, CardTitle, CardFooter } from "@/components/ui/card";
 
+export function Item({ item, overlay = false }) {
+    const { attributes, listeners, setNodeRef, transform } = useDraggable({
+        id: item.id,
+        data: { id: item.id },
+    });
+
+    const itemStyle = !overlay
+        ? { transform: CSS.Translate.toString(transform) }
+        : {};
 
     return (
-        <Card ref={setNodeRef} style={itemstyle} {...listeners} {...attributes} className='rounded-lg border bg-white/80  dark:bg-neutral-700 backdrop-blur-md shadow-md z-50 w-full'>
-            <CardHeader>
-                <CardTitle className='text-xl py-2'>
+        <Card
+            ref={!overlay ? setNodeRef : null}
+            style={itemStyle}
+            {...(!overlay ? { ...listeners, ...attributes } : {})}
+            className={`rounded-2xl border bg-white dark:bg-neutral-800 shadow-md z-50 w-full p-4 transition-transform duration-200 ease-in-out 
+                ${overlay ? 'opacity-80 scale-105 shadow-lg border-dashed border-indigo-500' : 'hover:shadow-2xl hover:scale-[1.02]'}`}
+        >
+            <CardHeader className="p-2">
+                <CardTitle className='text-lg font-semibold text-neutral-800 dark:text-white truncate'>
                     {item.title}
                 </CardTitle>
-                <CardDescription>
+                <CardDescription className='text-sm text-neutral-500 dark:text-neutral-400 line-clamp-2'>
                     {item.description}
                 </CardDescription>
             </CardHeader>
-            <CardFooter className='text-xs'>
-                Created on:{(new Date(item.created_at)).toLocaleString()}
-                <br></br>
-                Updated on:{(new Date(item.updated_at)).toLocaleString()}
+            <CardFooter className='text-xs text-neutral-400 dark:text-neutral-500 flex flex-col gap-1 mt-2'>
+                <span>📅 Created: {(new Date(item.created_at)).toLocaleDateString()}</span>
+                <span>🔄 Updated: {(new Date(item.updated_at)).toLocaleDateString()}</span>
             </CardFooter>
         </Card>
     );
