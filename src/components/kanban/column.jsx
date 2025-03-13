@@ -23,7 +23,7 @@ export function Column({ id, items = [], color }) {
 
             <CardDescription
                 ref={setNodeRef}
-                className={`min-h-[28rem] max-h-[60vh] overflow-auto p-3 space-y-3 transition-all border-2 border-dashed rounded-b-xl ${isOver ? 'border-lime-400 bg-lime-50 dark:bg-neutral-800' : 'border-transparent'}`}
+                className={`min-h-[28rem] max-h-[60vh] overflow-hidden p-3 space-y-3 transition-all border-2 border-dashed rounded-b-xl ${isOver ? 'border-lime-400 bg-lime-50 dark:bg-neutral-800' : 'border-transparent'}`}
             >
                 {items.length > 0 ? (
                     items.map((item) => (
