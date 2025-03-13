@@ -81,7 +81,7 @@ export default function UserCard({ id, title, description, status, createdOn, up
                 <Dialog>
                     <DialogTrigger asChild>
                         <Button className="w-full bg-teal-500 hover:bg-teal-700 text-white gap-2">
-                            <Pencil2Icon /> Edit
+                            <Pencil2Icon color="white" /> Edit
                         </Button>
                     </DialogTrigger>
                     <DialogContent>
@@ -96,7 +96,7 @@ export default function UserCard({ id, title, description, status, createdOn, up
                 <AlertDialog>
                     <AlertDialogTrigger asChild>
                         <Button className="w-full bg-rose-600 hover:bg-rose-800 text-white gap-2">
-                            <TrashIcon /> Delete
+                            <TrashIcon color="white" /> Delete
                         </Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>

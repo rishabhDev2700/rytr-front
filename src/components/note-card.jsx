@@ -60,14 +60,14 @@ export default function NoteCard({ id, title, content, createdOn, updatedOn, upd
             <CardFooter className="flex justify-between gap-2 pt-4">
                 <Link to={`/dashboard/editor/${id}`} className="w-full">
                     <Button className="w-full bg-indigo-600 hover:bg-indigo-800 text-white gap-2">
-                        <EnterIcon /> Open
+                        <EnterIcon color='white' /> Open
                     </Button>
                 </Link>
 
                 <AlertDialog>
                     <AlertDialogTrigger asChild>
                         <Button className="w-full bg-rose-600 hover:bg-rose-800 text-white gap-2">
-                            <TrashIcon /> Delete
+                            <TrashIcon color='white' /> Delete
                         </Button>
                     </AlertDialogTrigger>
                     <AlertDialogContent>
@@ -84,7 +84,7 @@ export default function NoteCard({ id, title, content, createdOn, updatedOn, upd
                                     className="bg-rose-600 hover:bg-rose-800 text-white gap-2"
                                     onClick={handleDelete}
                                 >
-                                    <TrashIcon /> Confirm Delete
+                                    <TrashIcon color='white' /> Confirm Delete
                                 </Button>
                             </AlertDialogAction>
                         </AlertDialogFooter>

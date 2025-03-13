@@ -20,30 +20,63 @@ export function AppSidebar() {
         navigate('/')
     }
     return (
-        <Sidebar className="shadow-lg shadow-black/30">
-            <SidebarHeader>
-                <div className="flex justify-evenly">
-                    <img src="/vite.svg" width="42px" className="bg-white rounded-full p-0.5" />
-
-                    <h1 className="text-4xl font-bold uppercase px-2">Rytr</h1>
+        <Sidebar className="shadow-lg shadow-black/30 bg-white dark:bg-neutral-900 rounded-r-xl overflow-hidden">
+            {/* Sidebar Header */}
+            <SidebarHeader className="p-4 border-b dark:border-neutral-700">
+                <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                        <img src="/vite.svg" width="42" className="bg-white rounded-full p-0.5 shadow" />
+                        <h1 className="text-2xl font-bold uppercase text-gray-800 dark:text-white tracking-wide">
+                            Rytr
+                        </h1>
+                    </div>
                     <ModeToggle />
                 </div>
             </SidebarHeader>
-            <SidebarContent className="m-0">
-                <SidebarGroup>
-                    <NavLink to="dashboard" className="flex items-center w-full p-4 border-b-2 hover:bg-neutral-200 dark:hover:bg-neutral-950 hover:shadow-inner hover:scale-95 duration-200" end><HomeIcon className="mx-4" />Home</NavLink>
-                    <NavLink to="dashboard/cards" className="flex items-center w-full p-4 border-b-2 hover:bg-neutral-200 dark:hover:bg-neutral-950 hover:shadow-inner hover:scale-95 duration-200" end><CardStackIcon className="mx-4" />Card</NavLink>
-                    <NavLink to="dashboard/kanban" className="flex items-center w-full p-4 border-b-2 hover:bg-neutral-200 dark:hover:bg-neutral-950 hover:shadow-inner hover:scale-95 duration-200" end><LayoutIcon className="mx-4" />Kanban Board</NavLink>
-                    <NavLink to="dashboard/notes" className="flex items-center w-full p-4 border-b-2 hover:bg-neutral-200 dark:hover:bg-neutral-950 hover:shadow-inner hover:scale-95 duration-200" end><FileTextIcon className="mx-4" />Notes</NavLink>
-                    <NavLink to="dashboard/assistant" className="flex items-center w-full p-4 border-b-2 hover:bg-neutral-200 dark:hover:bg-neutral-950 hover:shadow-inner hover:scale-95 duration-200" end><AvatarIcon className="mx-4" />AI Assistant</NavLink>
-                    <NavLink to="dashboard/feedback" className="flex items-center w-full p-4 border-b-2 hover:bg-neutral-200 dark:hover:bg-neutral-950 hover:shadow-inner hover:scale-95 duration-200" end><ChatBubbleIcon className="mx-4" />Feedback</NavLink>
 
+            {/* Sidebar Content */}
+            <SidebarContent className="p-2">
+                <SidebarGroup className="space-y-2">
+                    {[
+                        { to: "dashboard", label: "Home", Icon: HomeIcon },
+                        { to: "dashboard/cards", label: "Cards", Icon: CardStackIcon },
+                        { to: "dashboard/kanban", label: "Kanban Board", Icon: LayoutIcon },
+                        { to: "dashboard/notes", label: "Notes", Icon: FileTextIcon },
+                        { to: "dashboard/assistant", label: "AI Assistant", Icon: AvatarIcon },
+                        { to: "dashboard/feedback", label: "Feedback", Icon: ChatBubbleIcon },
+                    ].map(({ to, label, Icon }) => (
+                        <NavLink
+                            key={to}
+                            to={to}
+                            className={({ isActive }) =>
+                                `flex items-center gap-4 p-3 rounded-lg transition duration-200 ${isActive
+                                    ? "bg-blue-100 dark:bg-blue-800 text-blue-700 dark:text-blue-300 shadow"
+                                    : "hover:bg-gray-100 dark:hover:bg-neutral-800 hover:shadow-inner"
+                                }`
+                            }
+                            end
+                        >
+                            <Icon className="w-5 h-5" />
+                            <span className="text-sm font-medium">{label}</span>
+                        </NavLink>
+                    ))}
                 </SidebarGroup>
             </SidebarContent>
-            <SidebarFooter>
-                <Button variant="destructive" className="flex items-center w-full p-4 border-b-2 hover:bg-red-800 duration-200" onClick={logout}><ExitIcon color="white" />Logout</Button>
+
+            {/* Sidebar Footer */}
+            <SidebarFooter className="p-2 border-t dark:border-neutral-700">
+                <Button
+                    variant="destructive"
+                    className="flex items-center gap-3 w-full p-3 rounded-lg bg-red-600 hover:bg-red-700 transition duration-200"
+                    onClick={logout}
+                >
+                    <ExitIcon className="w-5 h-5" color="white" />
+                    <span className="text-sm font-medium text-white">Logout</span>
+                </Button>
             </SidebarFooter>
+
             <SidebarRail />
         </Sidebar>
+
     )
 }

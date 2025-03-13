@@ -66,7 +66,7 @@ export default function DashboardPage() {
                         </DialogContent>
                     </Dialog>
                 </CardHeader>
-                <CardContent className="grid lg:grid-cols-3 xl:grid-cols-4">
+                <CardContent className="grid lg:grid-cols-3 2xl:grid-cols-4 gap-4">
                     {
                         cards?.map(c => <UserCard title={c.title} description={c.description} status={`${c.status}`} id={c.id} key={c.id} createdOn={new Date(c.created_at)} updatedOn={new Date(c.updated_at)} update={fetchCards} />)
                     }
@@ -80,7 +80,7 @@ export default function DashboardPage() {
                     <CardTitle>Notes</CardTitle>
                     <Button className="flex col-start-3 lg:col-start-5 w-32" variant="outline" onClick={newNote} ><PlusIcon />New Note</Button>
                 </CardHeader>
-                <CardContent className="grid lg:grid-cols-3 xl:grid-cols-4">
+                <CardContent className="grid lg:grid-cols-3 2xl:grid-cols-4 gap-4">
                     {
                         notes?.map(n => <NoteCard key={n.id} title={n.title} content={n.content} id={n.id} createdOn={new Date()} updatedOn={new Date()} />)
                     }
