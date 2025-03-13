@@ -48,10 +48,10 @@ export default function DashboardPage() {
 
     }, []);
     return (
-        <motion.main animate={animation} transition={transition} className='min-h-screen bg-neutral-100 dark:bg-black p-2'>
+        <motion.main animate={animation} transition={transition} className='min-h-screen w-full bg-neutral-100 dark:bg-black p-2'>
             <h1 className="text-2xl font-semibold p-8">Dashboard</h1>
-            <Card className="m-2">
-                <CardHeader className="px-8 grid grid-cols-4 lg:grid-cols-4 items-center">
+            <Card className="my-2 mx-1 lg:mx-4">
+                <CardHeader className="lg:px-8 grid grid-cols-4 lg:grid-cols-4 items-center">
                     <CardTitle>Pending</CardTitle>
                     <Dialog>
                         <DialogTrigger asChild><Button variant="outline" className="flex col-start-3 lg:col-start-5 w-32"><PlusIcon />New Card</Button></DialogTrigger>
@@ -66,26 +66,26 @@ export default function DashboardPage() {
                         </DialogContent>
                     </Dialog>
                 </CardHeader>
-                <CardContent className="grid lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+                <CardContent className="grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 lg:gap-4 p-2 lg:p-6">
                     {
                         cards?.map(c => <UserCard title={c.title} description={c.description} status={`${c.status}`} id={c.id} key={c.id} createdOn={new Date(c.created_at)} updatedOn={new Date(c.updated_at)} update={fetchCards} />)
                     }
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="mt-4">
                     <Link to="cards" className="text-thin underline ml-4">See More</Link>
                 </CardFooter>
             </Card>
-            <Card className="m-2">
-                <CardHeader className="px-8 grid grid-cols-4 lg:grid-cols-4 items-center">
+            <Card className="lg:m-2">
+                <CardHeader className="px-8 grid grid-cols-4 lg:grid-cols-4">
                     <CardTitle>Notes</CardTitle>
                     <Button className="flex col-start-3 lg:col-start-5 w-32" variant="outline" onClick={newNote} ><PlusIcon />New Note</Button>
                 </CardHeader>
-                <CardContent className="grid lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+                <CardContent className="grid lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 lg:gap-4 p-2 lg:p-6">
                     {
                         notes?.map(n => <NoteCard key={n.id} title={n.title} content={n.content} id={n.id} createdOn={new Date()} updatedOn={new Date()} />)
                     }
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="mt-4">
                     <Link to="notes" className="text-thin underline ml-4">See More</Link>
                 </CardFooter>
             </Card>

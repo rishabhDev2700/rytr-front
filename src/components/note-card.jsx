@@ -26,14 +26,14 @@ export default function NoteCard({ id, title, content, createdOn, updatedOn, upd
     }
 
     return (
-        <Card className="w-full max-w-sm mx-auto my-4 shadow-lg rounded-2xl bg-slate-50 dark:bg-neutral-800 hover:shadow-xl transition duration-300 ease-in-out hover:scale-[1.02]">
+        <Card className="w-72 2xl:w-[22rem] mx-auto my-4 shadow-lg rounded-2xl bg-slate-50 dark:bg-neutral-800 hover:shadow-xl transition duration-300 ease-in-out hover:scale-[1.02] flex flex-col h-full">
             <CardHeader>
-                <CardTitle className="text-xl font-bold truncate text-gray-800 dark:text-white">
+                <CardTitle className="text-lg lg:text-xl font-bold text-gray-800 dark:text-white break-words">
                     {title || "Untitled Note"}
                 </CardTitle>
             </CardHeader>
 
-            <CardContent>
+            <CardContent className="flex-grow">
                 <Separator className="my-2 bg-gray-300 dark:bg-gray-600" />
                 <div className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
                     <p>📅 Created: {createdOn.toLocaleDateString('en-US', {
@@ -57,7 +57,7 @@ export default function NoteCard({ id, title, content, createdOn, updatedOn, upd
                 </div>
             </CardContent>
 
-            <CardFooter className="flex justify-between gap-2 pt-4">
+            <CardFooter className="flex flex-col sm:flex-row justify-between gap-2 pt-4">
                 <Link to={`/dashboard/editor/${id}`} className="w-full">
                     <Button className="w-full bg-indigo-600 hover:bg-indigo-800 text-white gap-2">
                         <EnterIcon color='white' /> Open
@@ -93,4 +93,4 @@ export default function NoteCard({ id, title, content, createdOn, updatedOn, upd
             </CardFooter>
         </Card>
     )
-}
+} 
