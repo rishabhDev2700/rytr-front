@@ -42,7 +42,7 @@ export default function DashboardLayout() {
         <AppSidebar />
         <SidebarTrigger />
         <div className="w-full flex flex-col">
-          <header className="w-full bg-white dark:bg-neutral-900 shadow-md px-6 py-4 flex justify-center items-center">
+          <header className="w-full bg-white/20 dark:bg-neutral-900/20 backdrop-blur-md shadow-md px-6 py-4 flex justify-center items-center sticky top-0 z-50">
             <div className="relative w-full max-w-2xl">
               <Input
                 type="text"

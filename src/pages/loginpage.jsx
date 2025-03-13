@@ -18,7 +18,7 @@ import { motion } from 'motion/react';
 import { animation, transition } from '../lib/constants'
 import { ModeToggle } from "../components/mode-toggle"
 import { useAuth } from '../components/auth-hook'
-
+import { AuroraText } from "@/components/magicui/aurora-text";
 export default function LoginPage() {
     const [email, setEmail] = useState("")
     const [firstName, setFirstName] = useState("")
@@ -85,9 +85,14 @@ export default function LoginPage() {
             <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-40 blur-3xl animate-aurora"></div>
 
             {/* App Heading */}
-            <h1 className="absolute top-12 left-1/2 transform -translate-x-1/2 text-4xl font-bold text-white drop-shadow-lg">
-                RYTR - Personal Productivity App
-            </h1>
+            <div className="absolute top-12 left-1/2 transform -translate-x-1/2 text-center text-white drop-shadow-lg">
+                <h1 className='text-xl lg:text-4xl font-bold'>
+                    RYTR
+                </h1>
+                <div className='px-4 py-2 bg-white dark:bg-neutral-900 rounded-full shadow-md shadow-black/20 mt-4'>              
+                <AuroraText speed={16} className='font-thin'>Personal Productivity App</AuroraText>
+</div>
+            </div>
 
             <Tabs defaultValue="login" className="min-w-[360px] absolute left-1/2 -translate-x-1/2 top-52">
                 <TabsList className="grid w-full grid-cols-2">

@@ -20,7 +20,7 @@ export function AppSidebar() {
         navigate('/')
     }
     return (
-        <Sidebar className="shadow-lg shadow-black/30 bg-white dark:bg-neutral-900 rounded-r-xl overflow-hidden">
+        <Sidebar className="bg-white dark:bg-neutral-900 rounded-r-xl overflow-hidden">
             {/* Sidebar Header */}
             <SidebarHeader className="p-4 border-b dark:border-neutral-700">
                 <div className="flex items-center justify-between">

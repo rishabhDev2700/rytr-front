@@ -39,7 +39,7 @@ export default function CardsPage() {
     fetchCards();
   }, []);
   return (
-    <motion.div animate={animation} transition={transition} className="w-full h-full bg-neutral-100 dark:bg-neutral-950 p-2">
+    <motion.div animate={animation} transition={transition} className="w-full h-[90vh] bg-neutral-50 dark:bg-neutral-950 px-2">
       <div className="flex items-center justify-between mr-8">
         <h1 className="text-2xl font-semibold p-8">Your Cards</h1>
         <Dialog>

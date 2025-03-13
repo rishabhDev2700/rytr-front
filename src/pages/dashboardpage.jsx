@@ -75,8 +75,8 @@ export default function DashboardPage() {
                     <Link to="cards" className="text-thin underline ml-4">See More</Link>
                 </CardFooter>
             </Card>
-            <Card className="lg:m-2">
-                <CardHeader className="px-8 grid grid-cols-4 lg:grid-cols-4">
+            <Card className="my-2 mx-1 lg:mx-4">
+                <CardHeader className="lg:px-8 grid grid-cols-4 lg:grid-cols-4 items-center">
                     <CardTitle>Notes</CardTitle>
                     <Button className="flex col-start-3 lg:col-start-5 w-32" variant="outline" onClick={newNote} ><PlusIcon />New Note</Button>
                 </CardHeader>

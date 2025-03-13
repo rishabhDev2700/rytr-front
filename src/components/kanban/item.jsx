@@ -19,7 +19,7 @@ export function Item({ item, overlay = false }) {
             ref={!overlay ? setNodeRef : null}
             style={itemStyle}
             {...(!overlay ? { ...listeners, ...attributes } : {})}
-            className={`rounded-2xl border bg-white dark:bg-neutral-800 shadow-md z-50 w-full p-4 transition-transform duration-200 ease-in-out 
+            className={`rounded-2xl border bg-white/90 dark:bg-neutral-800/90 backdrop-blur-md shadow-md z-50 w-full p-4 transition-transform duration-200 ease-in-out 
                 ${overlay ? 'opacity-80 scale-105 shadow-lg border-dashed border-indigo-500' : 'hover:shadow-2xl hover:scale-[1.02]'}`}
         >
             <CardHeader className="p-2">
@@ -30,7 +30,7 @@ export function Item({ item, overlay = false }) {
                     {item.description}
                 </CardDescription>
             </CardHeader>
-            <Separator/>
+            <Separator />
             <CardFooter className='text-xs text-neutral-400 dark:text-neutral-500 flex justify-between mt-2 px-2 pb-3'>
                 <span>📅 Created: {(new Date(item.created_at)).toLocaleDateString()}</span>
                 <span>🔄 Updated: {(new Date(item.updated_at)).toLocaleDateString()}</span>
