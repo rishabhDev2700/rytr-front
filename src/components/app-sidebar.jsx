@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { FileTextIcon, CardStackIcon, ExitIcon, HomeIcon, LayoutIcon, AvatarIcon, ChatBubbleIcon } from "@radix-ui/react-icons"
 import { ModeToggle } from "@/components/mode-toggle"
 import { useAuth } from "./auth-hook"
+import { Cpu } from "lucide-react"
 export function AppSidebar() {
     const { setToken } = useAuth()
     const navigate = useNavigate()
@@ -38,12 +39,13 @@ export function AppSidebar() {
             <SidebarContent className="p-2">
                 <SidebarGroup className="space-y-2">
                     {[
-                        { to: "dashboard", label: "Home", Icon: HomeIcon },
-                        { to: "dashboard/cards", label: "Cards", Icon: CardStackIcon },
-                        { to: "dashboard/kanban", label: "Kanban Board", Icon: LayoutIcon },
-                        { to: "dashboard/notes", label: "Notes", Icon: FileTextIcon },
-                        { to: "dashboard/assistant", label: "AI Assistant", Icon: AvatarIcon },
-                        { to: "dashboard/feedback", label: "Feedback", Icon: ChatBubbleIcon },
+                    { to: "dashboard/profile", label: "Profile", Icon: AvatarIcon },
+                    { to: "dashboard", label: "Home", Icon: HomeIcon },
+                    { to: "dashboard/cards", label: "Cards", Icon: CardStackIcon },
+                    { to: "dashboard/kanban", label: "Kanban Board", Icon: LayoutIcon },
+                    { to: "dashboard/notes", label: "Notes", Icon: FileTextIcon },
+                    { to: "dashboard/assistant", label: "AI Assistant", Icon: Cpu },
+                    { to: "dashboard/feedback", label: "Feedback", Icon: ChatBubbleIcon },
                     ].map(({ to, label, Icon }) => (
                         <NavLink
                             key={to}

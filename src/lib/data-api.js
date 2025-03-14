@@ -48,7 +48,7 @@ export const authAPI = {
                 email,
                 password
             });
-            console.log("Login response:",response.status)
+            console.log("Login response:", response.status)
             return response;
         } catch (error) {
             console.log("catched")
@@ -99,7 +99,7 @@ export const authAPI = {
 export const userAPI = {
     getProfile: async () => {
         try {
-            const response = await api.get('/user/profile');
+            const response = await api.get('/profile');
             return response.data;
         } catch (error) {
             throw error.response?.data || { message: 'Failed to fetch profile' };
@@ -108,18 +108,20 @@ export const userAPI = {
 
     updateProfile: async (profileData) => {
         try {
-            const response = await api.put('/user/profile', profileData);
+            const response = await api.put('/profile', profileData);
             return response.data;
         } catch (error) {
             throw error.response?.data || { message: 'Failed to update profile' };
         }
     },
 
-    changePassword: async (currentPassword, newPassword) => {
+    changePassword: async (old_password, new_password) => {
+        console.log(typeof oldPassword, oldPassword);
+        console.log(typeof newPassword, newPassword);
         try {
-            const response = await api.post('/user/change-password', {
-                currentPassword,
-                newPassword
+            const response = await api.post('/reset-password', {
+                old_password,
+                new_password,
             });
             return response.data;
         } catch (error) {
