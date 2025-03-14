@@ -53,10 +53,10 @@ export default function Profile() {
                 )}
             </CardContent>
             <CardFooter className="flex flex-col space-y-3 md:flex-row md:space-y-0 md:space-x-4">
-                <Button asChild variant="default" className="w-full md:w-auto">
+                <Button asChild className="w-full md:w-auto bg-purple-600 hover:bg-purple-800 dark:text-white">
                     <Link to="/dashboard/profile/edit">Edit Profile Information</Link>
                 </Button>
-                <Button asChild variant="secondary" className="w-full md:w-auto border">
+                <Button asChild variant="secondary" className="w-full md:w-auto border hover:bg-cyan-500 hover:text-white">
                     <Link to="/dashboard/profile/change-password">Change Password</Link>
                 </Button>
             </CardFooter>

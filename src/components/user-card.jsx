@@ -84,7 +84,7 @@ export default function UserCard({ id, title, description, status, createdOn, up
                             <Pencil2Icon color="white" /> Edit
                         </Button>
                     </DialogTrigger>
-                    <DialogContent>
+                    <DialogContent className="rounded-lg w-5/6">
                         <DialogHeader>
                             <DialogTitle>Edit Card</DialogTitle>
                             <DialogDescription>Update your card details.</DialogDescription>

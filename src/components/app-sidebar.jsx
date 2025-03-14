@@ -26,7 +26,7 @@ export function AppSidebar() {
             <SidebarHeader className="p-4 border-b dark:border-neutral-700">
                 <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
-                        <img src="/vite.svg" width="42" className="bg-white rounded-full p-0.5 shadow" />
+                        <img src="/logo.png" width="42" className="bg-white rounded-full p-0.5 shadow" />
                         <h1 className="text-2xl font-bold uppercase text-gray-800 dark:text-white tracking-wide">
                             Rytr
                         </h1>
@@ -39,13 +39,13 @@ export function AppSidebar() {
             <SidebarContent className="p-2">
                 <SidebarGroup className="space-y-2">
                     {[
-                    { to: "dashboard/profile", label: "Profile", Icon: AvatarIcon },
-                    { to: "dashboard", label: "Home", Icon: HomeIcon },
-                    { to: "dashboard/cards", label: "Cards", Icon: CardStackIcon },
-                    { to: "dashboard/kanban", label: "Kanban Board", Icon: LayoutIcon },
-                    { to: "dashboard/notes", label: "Notes", Icon: FileTextIcon },
-                    { to: "dashboard/assistant", label: "AI Assistant", Icon: Cpu },
-                    { to: "dashboard/feedback", label: "Feedback", Icon: ChatBubbleIcon },
+                        { to: "dashboard/profile", label: "Profile", Icon: AvatarIcon },
+                        { to: "dashboard", label: "Home", Icon: HomeIcon },
+                        { to: "dashboard/cards", label: "Cards", Icon: CardStackIcon },
+                        { to: "dashboard/kanban", label: "Kanban Board", Icon: LayoutIcon },
+                        { to: "dashboard/notes", label: "Notes", Icon: FileTextIcon },
+                        { to: "dashboard/assistant", label: "AI Assistant", Icon: Cpu },
+                        { to: "dashboard/feedback", label: "Feedback", Icon: ChatBubbleIcon },
                     ].map(({ to, label, Icon }) => (
                         <NavLink
                             key={to}

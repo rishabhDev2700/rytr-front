@@ -80,7 +80,7 @@ export default function DashboardLayout() {
 
               {/* Search Results Dropdown - Now checks both searchQuery and inputFocused */}
               {searchQuery && inputFocused && (
-                <div className="absolute z-20 w-full bg-white/60 dark:bg-neutral-800/60 backdrop-blur-lg border border-gray-200 dark:border-neutral-700 rounded-xl shadow-lg mt-3 overflow-hidden animate-fade-in">
+                <div className="absolute z-20 w-full bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-xl shadow-lg mt-3 overflow-hidden animate-fade-in">
                   {loading ? (
                     <div className="p-4 text-gray-500 dark:text-gray-400 text-center">
                       Loading...

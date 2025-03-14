@@ -3,6 +3,7 @@ import NoteCard from "../components/note-card";
 import { Button } from "../components/ui/button";
 import { PlusIcon } from "@radix-ui/react-icons";
 import { motion } from "motion/react";
+import { Skeleton } from "../components/ui/skeleton";
 
 import { useNavigate } from "react-router";
 import { useAuth } from "../components/auth-hook";
@@ -13,10 +14,16 @@ export default function NotesPage() {
   const { token } = useAuth();
   let navigate = useNavigate();
   const [notes, setNotes] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   async function fetchNotes() {
-    const notesData = await dataAPI.getAllNotes();
-    setNotes(notesData.notes);
+    setLoading(true);
+    try {
+      const notesData = await dataAPI.getAllNotes();
+      setNotes(notesData.notes);
+    } finally {
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -45,17 +52,24 @@ export default function NotesPage() {
         </Button>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-2 lg:gap-4">
-        {notes?.map((n) => (
-          <NoteCard
-            id={n.id}
-            key={n.id}
-            title={n.title}
-            content={n.content}
-            createdOn={new Date(n.created_at)}
-            updatedOn={new Date(n.updated_at)}
-            update={fetchNotes}
-          />
-        ))}
+        {loading
+          ? Array.from({ length: 4 }).map((_, index) => (
+            <Skeleton
+              key={index}
+              className="h-80 m-2 rounded-lg bg-neutral-200 dark:bg-neutral-800"
+            />
+          ))
+          : notes.map((n) => (
+            <NoteCard
+              id={n.id}
+              key={n.id}
+              title={n.title}
+              content={n.content}
+              createdOn={new Date(n.created_at)}
+              updatedOn={new Date(n.updated_at)}
+              update={fetchNotes}
+            />
+          ))}
       </div>
     </motion.div>
   );

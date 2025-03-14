@@ -26,9 +26,9 @@ export default function KanbanPage() {
     }
   }, []);
   return (
-    <motion.div animate={animation} transition={transition}>
+    <motion.div animate={animation} transition={transition} className="p-2">
       <div className="flex items-center justify-between mr-8">
-        <h1 className="text-2xl font-semibold p-8">KanbanBoard</h1>
+        <h1 className="text-2xl font-semibold py-4 px-8">KanbanBoard</h1>
         <Dialog>
           <DialogTrigger asChild><Button variant="outline" className="flex col-start-3 lg:col-start-5 w-32"><PlusIcon />New Card</Button></DialogTrigger>
           <DialogContent className="w-4/5 rounded-xl">
