@@ -1,15 +1,17 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import { Outlet } from "react-router";
+import { Link, Outlet } from "react-router";
 import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
+import { dataAPI } from "../lib/data-api";
+import { Badge } from "@/components/ui/badge"
 
 export default function DashboardLayout() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-
+  const [inputFocused, setInputFocused] = useState(false);
   useEffect(() => {
     if (!searchQuery) {
       setSearchResults([]);
@@ -27,8 +29,9 @@ export default function DashboardLayout() {
     setLoading(true);
     setError(null);
     try {
-      const response = await axios.get(`/api/search?q=${searchQuery}`);
-      setSearchResults(response.data || []);
+      const response = await dataAPI.searchData(searchQuery)
+      console.log(response)
+      setSearchResults(response.results || {});
     } catch (err) {
       setError("Failed to fetch search results.");
     } finally {
@@ -49,6 +52,11 @@ export default function DashboardLayout() {
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => setInputFocused(true)}
+                onBlur={() => {
+                  // Small delay to allow clicking on results before they disappear
+                  setTimeout(() => setInputFocused(false), 200);
+                }}
                 className="w-full border border-gray-300 dark:border-neutral-700 bg-gray-50 dark:bg-neutral-800 text-gray-900 dark:text-white rounded-xl px-5 py-3 pr-12 shadow-md shadow-black/10 focus:outline-none focus:ring-2 focus:ring-blue-500 transition focus:px-8"
               />
 
@@ -70,25 +78,44 @@ export default function DashboardLayout() {
                 </svg>
               </div>
 
-              {/* Search Results Dropdown */}
-              {searchQuery && (
-                <div className="absolute z-20 w-full bg-white dark:bg-neutral-800 border border-gray-200 dark:border-neutral-700 rounded-xl shadow-lg mt-3 overflow-hidden animate-fade-in">
+              {/* Search Results Dropdown - Now checks both searchQuery and inputFocused */}
+              {searchQuery && inputFocused && (
+                <div className="absolute z-20 w-full bg-white/60 dark:bg-neutral-800/60 backdrop-blur-lg border border-gray-200 dark:border-neutral-700 rounded-xl shadow-lg mt-3 overflow-hidden animate-fade-in">
                   {loading ? (
                     <div className="p-4 text-gray-500 dark:text-gray-400 text-center">
                       Loading...
                     </div>
                   ) : error ? (
                     <div className="p-4 text-red-500 text-center">{error}</div>
-                  ) : searchResults.length > 0 ? (
-                    searchResults.map((result) => (
-                      <div
-                        key={result.id}
-                        className="p-3 hover:bg-gray-100 dark:hover:bg-neutral-700 cursor-pointer transition rounded-md"
-                        onClick={() => console.log("Selected:", result)}
-                      >
-                        {result.name}
-                      </div>
-                    ))
+                  ) : (searchResults.notes?.length > 0 || searchResults.cards?.length > 0) ? (
+                    <>
+                      {/* Display notes */}
+                      {searchResults.notes?.map((note) => (
+                        <Link
+                          key={note.id}
+                          className="block p-3 hover:bg-gray-100 dark:hover:bg-neutral-700 cursor-pointer transition rounded-md"
+                          to={`/dashboard/editor/${note.id}`}
+                        >
+                          <div className="flex justify-between">
+                            <div className="font-medium">{note.title}</div>
+                            <Badge>Note</Badge>
+                          </div>
+                        </Link>
+                      ))}
+
+                      {/* Display cards */}
+                      {searchResults.cards?.map((card) => (
+                        <Link
+                          key={card.id}
+                          className="block p-3 hover:bg-gray-100 dark:hover:bg-neutral-700 cursor-pointer transition rounded-md"
+                          to={`/dashboard/cards/#${card.id}`}>
+                          <div className="flex justify-between">
+                            <div className="font-medium">{card.title}</div><Badge>Card</Badge>
+                          </div>
+                          <div className="text-sm text-gray-500 dark:text-gray-400 truncate">{card.description}</div>
+                        </Link>
+                      ))}
+                    </>
                   ) : (
                     <div className="p-4 text-gray-500 dark:text-gray-400 text-center">
                       No results found.

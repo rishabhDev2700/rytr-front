@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import { dataAPI } from "../lib/data-api";
-import { LoaderPinwheelIcon } from "lucide-react";
 import { motion } from "motion/react"
 import { transition } from "../lib/constants";
 import { useDebouncedCallback } from 'use-debounce';
@@ -12,6 +11,7 @@ import Link from "@editorjs/link";
 import Delimiter from "@editorjs/delimiter";
 import EditorJS from '@editorjs/editorjs';
 import { useParams } from "react-router";
+import {PropagateLoader} from 'react-spinners';
 import './../editor.css';
 
 
@@ -99,19 +99,21 @@ export default function NoteEditor() {
 
 
     return (
-        <div className="lg:m-4">
+        <div className="lg:m-4 transition-all duration-200">
             <input
                 value={note.title}
                 onChange={e => updateTitle(e.target.value)}
-                className="text-4xl my-8 p-2 rounded-xl bg-transparent text-neutral-500 focus:text-neutral-800 dark:focus:text-neutral-300 outline-none w-full"
+                className="text-4xl my-8 p-2 md:pl-16 lg:pl-24 xl:pl-40 2xl:pl-56 rounded-xl bg-transparent text-neutral-500 focus:text-neutral-800 dark:focus:text-neutral-300 outline-none w-full"
                 placeholder="Title of the Note"
             />
+            <Separator orientation="horizontal" />
             <div id="editorblock" className="ce-block__content editorjs-toolbar"></div>
             <Separator orientation="horizontal" />
+
             {loading &&
 
-                <motion.div animate={{ opacity: [0, 100] }} transition={transition} className="absolute bottom-24 right-24 w-min flex items-center justify-between p-2 font-mono backdrop-blur-sm scale-110 z-50">
-                    <LoaderPinwheelIcon className="animate-spin" /> <div className="ml-2">Saving</div>
+                <motion.div animate={{ opacity: [0, 100] }} transition={transition} className="absolute bottom-24 right-24 w-44 flex items-center justify-between p-2 font-mono backdrop-blur-sm scale-110 z-50">
+                    <PropagateLoader loading={loading} size={10}  color="white"/> <div className="">Saving</div>
                 </motion.div>
             }
         </div>

@@ -30,7 +30,7 @@ export default function DashboardPage() {
         setCards(cardsData.cards)
     }
     async function fetchNotes() {
-        const notesData = await dataAPI.getAllNotes();
+        const notesData = await dataAPI.getAllNotes(4);
         setNotes(notesData.notes)
     }
     async function newNote() {

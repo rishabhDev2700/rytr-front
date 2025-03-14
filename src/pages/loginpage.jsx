@@ -19,12 +19,15 @@ import { animation, transition } from '../lib/constants'
 import { ModeToggle } from "../components/mode-toggle"
 import { useAuth } from '../components/auth-hook'
 import { AuroraText } from "@/components/magicui/aurora-text";
+import { PropagateLoader } from 'react-spinners';
+
 export default function LoginPage() {
     const [email, setEmail] = useState("")
     const [firstName, setFirstName] = useState("")
     const [lastName, setLastName] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
+    const [loading, setLoading] = useState(false)
     const [errors, setErrors] = useState({})
     const navigate = useNavigate()
     const { token, setToken } = useAuth();
@@ -42,6 +45,13 @@ export default function LoginPage() {
 
     async function handleLoginSubmission(e) {
         e.preventDefault()
+        if (loading) return;
+        setLoading(true);
+        if (!email || !password) {
+            toast("Please fill all fields")
+            setLoading(false);
+            return false
+        }
         try {
             const response = await authAPI.login(email, password)
             if (response.status === 200) {
@@ -54,11 +64,14 @@ export default function LoginPage() {
         }
         catch (err) {
             toast("Invalid Credentials")
+        } finally {
+            setLoading(false);
         }
     }
 
     async function handleRegisterSubmission(e) {
         e.preventDefault()
+        if (loading) return;
         if (confirmPassword !== password) {
             toast("Passwords didn't match")
             return false
@@ -67,6 +80,7 @@ export default function LoginPage() {
             toast("Password must be at least 8 characters long, include an uppercase letter, a lowercase letter, a number, and a special character.")
             return false
         }
+        setLoading(true);
         try {
             const response = await authAPI.register({ first_name: firstName, last_name: lastName, email: email, password: password })
             if (response.status === 200) {
@@ -74,6 +88,8 @@ export default function LoginPage() {
             }
         } catch (error) {
             toast("Something went wrong")
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -89,19 +105,19 @@ export default function LoginPage() {
                 <h1 className='text-xl lg:text-4xl font-bold'>
                     RYTR
                 </h1>
-                <div className='px-4 py-2 bg-white dark:bg-neutral-900 rounded-full shadow-md shadow-black/20 mt-4'>              
-                <AuroraText speed={16} className='font-thin'>Personal Productivity App</AuroraText>
-</div>
+                <div className='px-4 py-2 bg-white/90 dark:bg-neutral-900/90 rounded-full shadow-md shadow-black/10 mt-4 backdrop-blur-lg'>
+                    <AuroraText speed={16} className='font-thin'>Personal Productivity App</AuroraText>
+                </div>
             </div>
 
             <Tabs defaultValue="login" className="min-w-[360px] absolute left-1/2 -translate-x-1/2 top-52">
-                <TabsList className="grid w-full grid-cols-2">
+                <TabsList className="grid w-full grid-cols-2 shadow-lg shadow-black/20">
                     <TabsTrigger value="login">Login</TabsTrigger>
                     <TabsTrigger value="signup">Sign up</TabsTrigger>
                 </TabsList>
                 <TabsContent value="login">
                     <form onSubmit={handleLoginSubmission}>
-                        <Card>
+                        <Card className="shadow-lg shadow-black/20">
                             <CardHeader>
                                 <CardTitle>Log into Account</CardTitle>
                                 <CardDescription>Enter your credentials</CardDescription>
@@ -117,14 +133,14 @@ export default function LoginPage() {
                                 </div>
                             </CardContent>
                             <CardFooter>
-                                <Button className="w-full dark:text-black" type="submit">Login</Button>
+                                <Button className="w-full dark:text-black flex items-center justify-center bg-violet-500 hover:bg-violet-800 shadow-md hover:shadow-black/20" type="submit" disabled={loading}>{loading ? <PropagateLoader loading={loading} size={10} color='purple' /> : "Login"}</Button>
                             </CardFooter>
                         </Card>
                     </form>
                 </TabsContent>
                 <TabsContent value="signup">
                     <form onSubmit={handleRegisterSubmission}>
-                        <Card>
+                        <Card className="shadow-lg shadow-black/20">
                             <CardHeader>
                                 <CardTitle>Sign up</CardTitle>
                                 <CardDescription>Create a new Account</CardDescription>
@@ -152,7 +168,7 @@ export default function LoginPage() {
                                 </div>
                             </CardContent>
                             <CardFooter>
-                                <Button className="w-full dark:text-black" type="submit">Sign up</Button>
+                                <Button className="w-full dark:text-black grid content-center bg-blue-500 hover:bg-blue-800 shadow-md hover:shadow-black/20" type="submit" disabled={loading}>{loading ? <PropagateLoader loading={loading} size={10} color='purple' /> : "Sign up"}</Button>
                             </CardFooter>
                         </Card>
                     </form>

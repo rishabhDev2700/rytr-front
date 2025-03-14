@@ -46,7 +46,7 @@ export default function UserCard({ id, title, description, status, createdOn, up
     }
 
     return (
-        <Card className="w-full max-w-sm mx-auto my-4 shadow-lg rounded-2xl bg-slate-50 dark:bg-neutral-900 hover:shadow-xl transition-transform duration-300 hover:scale-[1.02] h-full flex flex-col">
+        <Card id={id} className="w-full max-w-sm mx-auto my-4 shadow-lg rounded-2xl bg-slate-50 dark:bg-neutral-900 hover:shadow-xl transition-transform duration-300 hover:scale-[1.02] h-full flex flex-col">
             <div className="flex-1 flex flex-col">
                 <CardHeader>
                     <CardTitle className="text-xl font-semibold text-gray-800 dark:text-white truncate">

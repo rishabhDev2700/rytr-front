@@ -193,8 +193,12 @@ export const dataAPI = {
 
     // calls to notes endpoints
 
-    getAllNotes: async () => {
+    getAllNotes: async (limit) => {
         try {
+            if (limit) {
+                const response = await api.get(`/notes?limit=${limit}`);
+                return response.data;
+            }
             const response = await api.get('/notes');
             return response.data;
         } catch (error) {
@@ -237,4 +241,14 @@ export const dataAPI = {
             throw error.response?.data || { message: 'Failed to delete note' };
         }
     },
+
+    // searching
+    searchData: async (query) => {
+        try {
+            const response = await api.get(`/search?q=${query}`);
+            return response.data;
+        } catch (error) {
+            throw error.response?.data || { message: 'Failed to search' };
+        }
+    }
 };
