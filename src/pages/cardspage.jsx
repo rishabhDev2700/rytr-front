@@ -71,7 +71,7 @@ export default function CardsPage() {
         {loading ? (
           Array.from({ length: 4 }).map((_, i) => <Skeleton className="h-72 mt-4" key={i} />)
         ) : (
-          data.length > 0 ? data : "No Card to show"
+          data?.length > 0 ? data : "No Card to show"
         )}
       </div>
     </motion.div>

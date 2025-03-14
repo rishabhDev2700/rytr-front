@@ -77,7 +77,7 @@ export default function Kanban({ items, update }) {
           <Column
             key={s.index}
             id={s.index}
-            items={optimisticItems.filter((item) => item.status === s.index)}
+            items={optimisticItems?.filter((item) => item.status === s.index)}
             color={s.color}
           />
         ))}
