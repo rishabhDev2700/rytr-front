@@ -82,7 +82,7 @@ export default function DashboardPage() {
                     {loadingCards ? (
                         Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-72 mt-8 w-full rounded-lg" />)
                     ) : (
-                        cards.map(c => (
+                        cards?.map(c => (
                             <UserCard
                                 title={c.title}
                                 description={c.description}
@@ -111,7 +111,7 @@ export default function DashboardPage() {
                     {loadingNotes ? (
                         Array.from({ length: 4 }).map((_, i) => <Skeleton key={i} className="h-72 mt-8 w-full rounded-lg" />)
                     ) : (
-                        notes.map(n => (
+                        notes?.map(n => (
                             <NoteCard
                                 key={n.id}
                                 title={n.title}

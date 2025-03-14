@@ -59,7 +59,7 @@ export default function NotesPage() {
               className="h-80 m-2 rounded-lg bg-neutral-200 dark:bg-neutral-800"
             />
           ))
-          : notes.map((n) => (
+          : notes?.map((n) => (
             <NoteCard
               id={n.id}
               key={n.id}
