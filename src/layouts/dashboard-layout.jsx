@@ -93,6 +93,7 @@ export default function DashboardLayout() {
                       {searchResults.notes?.map((note) => (
                         <Link
                           key={note.id}
+                          reloadDocument
                           className="block p-3 hover:bg-gray-100 dark:hover:bg-neutral-700 cursor-pointer transition rounded-md"
                           to={`/dashboard/editor/${note.id}`}
                         >
